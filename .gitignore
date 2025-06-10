@@ -1,0 +1,38 @@
+# Ignore sensitive AWS credentials if ever generated here (prefer ~/.aws/)
+.aws/
+*.pem
+*.pem.pub
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform/
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform.lock.hcl
+terraform/.terraform.tfstate.lock.info
+# SSH keys
+minecraft_key
+minecraft_key.pub
+minecraft_key.pem
+minecraft_key.pem.pub
+
+# Python cache (if Ansible uses Python)
+__pycache__/
+*.pyc
+
+# Logs and debug files
+*.log
+*.tmp
+*.swp
+
+# IDE/workspace files
+.vscode/
+.idea/
+.DS_Store
+
+# Nmap outputs
+nmap_scan.txt
+
+# Misc
+*.bak

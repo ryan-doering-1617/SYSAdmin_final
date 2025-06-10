@@ -1,0 +1,41 @@
+---
+- name: Setup Minecraft server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Java
+      apt:
+        name: openjdk-17-jre-headless
+        state: present
+        update_cache: true
+
+    - name: Install Docker
+      apt:
+        name: [docker.io]
+        state: present
+
+    - name: Enable and start Docker
+      systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Pull Minecraft Docker image
+      docker_image:
+        name: itzg/minecraft-server
+        source: pull
+
+    - name: Run Minecraft server in Docker
+      docker_container:
+        name: mc
+        image: itzg/minecraft-server
+        state: started
+        restart_policy: always
+        ports:
+          - "25565:25565"
+        env:
+          EULA: "TRUE"
+          MEMORY: "2G"
+        volumes:
+          - /opt/minecraft:/data
